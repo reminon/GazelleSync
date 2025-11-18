@@ -43,9 +43,14 @@ elif __file__:
        default_size=(610, 740),
        show_success_modal=False,
        show_failure_modal=False,
+       header_bg_color="#58656e",
+       body_bg_color="#224464",
+       footer_bg_color="#224464",
+       sidebar_bg_color="#224464",
+       terminal_panel_color="#58656e",
        program_name="GazelleSync GUI")
 def parse_args():
-    settings_msg = 'Bring torrents from one Gazelle instance to another'
+    settings_msg = 'Copy torrents from one Gazelle instance to another'
     parser = GooeyParser(description=settings_msg)
 
     # --from <>
@@ -54,7 +59,7 @@ def parse_args():
         metavar='From',
         choices=trackers,
         required=True,
-        help="torrents from which Gazelle instance"
+        help="Origin tracker"
     )
 
     # -to <>
@@ -63,7 +68,7 @@ def parse_args():
         metavar='To',
         choices=trackers,
         required=True,
-        help="sync to which Gazelle instance"
+        help="Destination tracker"
     )
 
     # --album <> / --folder <>
@@ -76,13 +81,13 @@ def parse_args():
     group.add_argument(
         "--album",
         metavar='Album',
-        help="the folder of the album",
+        help="Specific album",
         widget="DirChooser"
     )
     group.add_argument(
         "--folder",
         metavar='Folder',
-        help="the folder that contauins all albums. The album folder will be extracted from the site metadata",
+        help="The folder that contains all albums. The album folder will be extracted from the site metadata",
         widget="DirChooser"
     )
 
@@ -94,23 +99,23 @@ def parse_args():
     group.add_argument(
         "--link",
         metavar='PL Link',
-        help="the whole permalinlk. The tool os smart enough to extract it"
+        help="Permalink for the origin torrent."
     )
     group.add_argument(
         "--tid",
         metavar='Torrent ID',
-        help="the torrent ID"
+        help="Torrent ID for the origin torrent."
     )
     group.add_argument(
         "--tpath",
         metavar='Torrent Path',
-        help="the path that points towards the .torrent file. The infohash will be computed",
+        help="Path to local .torrent file.",
         widget="FileChooser"
     )
     group.add_argument(
         "--tfolder",
         metavar='Torrent Folder',
-        help="the folder containing all the .torrent files",
+        help="Folder containing all the .torrent files",
         widget="DirChooser"
     )
 
@@ -118,7 +123,7 @@ def parse_args():
         '-c', '--config',
         metavar='Config File Path',
         default=os.path.join(application_path, 'config.cfg'),
-        help='config file with login details (default: config.cfg)',
+        help='Config file with login details (default: config.cfg)',
         widget="FileChooser"
     )
 
@@ -153,7 +158,7 @@ def main():
         argv.insert(0, real_command_exe)
     else:
         argv.insert(0, real_command_code)
-        argv.insert(0, "python")
+        argv.insert(0, "python3")
 
     print(argv)
     return subprocess.call(argv)
