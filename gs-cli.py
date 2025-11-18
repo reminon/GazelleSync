@@ -153,7 +153,7 @@ def generateSourceTrackerAPI(tracker, username, password, cookie):
 def generateDestinationTrackerAPI(tracker, username, password, cookie):
     if tracker == "red":
         logging.info("Destination tracker is RED")
-        return WhatAPI(username=username, password=password, cookie=cookie, tracker="https://flacsfor.me/{0}/announce", url="https://redacted.ch/", site="RED")
+        return WhatAPI(username=username, password=password, cookie=cookie, tracker="https://flacsfor.me/{0}/announce", url="https://redacted.sh/", site="RED")
     elif tracker == "ops":
         logging.info("Destination tracker is OPS")
         return WhatAPI(username=username, password=password, cookie=cookie, tracker="https://home.opsfet.ch/{0}/announce", url="https://orpheus.network/", site="OPS")
@@ -162,7 +162,7 @@ def generateDestinationTrackerAPI(tracker, username, password, cookie):
         return WhatAPI(username=username, password=password, cookie=cookie, tracker="https://definitely.notwhat.cd:443/{0}/announce", url="https://notwhat.cd/", site="NWCD")
     elif tracker == "dic":
         logging.info("Destination tracker is DIC")
-        return WhatAPI(username=username, password=password, cookie=cookie, tracker="https://tracker.dicmusic.club/{0}/announce", url="https://dicmusic.club/", site="DIC")
+        return WhatAPI(username=username, password=password, cookie=cookie, tracker="https://tracker.dicmusic.com/{0}/announce", url="https://dicmusic.com/", site="DIC")
 
 
 def generateSourceFlag(tracker):
@@ -559,7 +559,7 @@ def main():
     )
     group.add_argument(
         "--folder",
-        help="the folder that contauins all albums. The album folder will be extracted from the site metadata"
+        help="the folder that contains all albums. The album folder will be extracted from the site metadata"
     )
 
     # --tid <> / --link <> / --tpath <> / --tfolder <>
