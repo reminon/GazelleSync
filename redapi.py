@@ -83,7 +83,7 @@ class RedApi:
 
 	def _login(self):
 		"""Logs in user and gets authkey from server"""
-		loginpage = 'https://redacted.ch/login.php'
+		loginpage = 'https://redacted.sh/login.php'
 		data = {'username': self.username,
                 'password': self.password
         }
@@ -93,13 +93,13 @@ class RedApi:
 		self._auth()
 
 	def logout(self):
-		self.session.get("https://redacted.ch/logout.php?auth=%s" % self.authkey)
+		self.session.get("https://redacted.sh/logout.php?auth=%s" % self.authkey)
 
 	def request(self, action, **kwargs):
 		"""Makes an AJAX request at a given action page"""
 		self._rate_limit()
 
-		ajaxpage = 'https://redacted.ch/ajax.php'
+		ajaxpage = 'https://redacted.sh/ajax.php'
 		params = {'action': action}
 		if self.authkey:
 			params['auth'] = self.authkey
@@ -117,7 +117,7 @@ class RedApi:
 	def request_html(self, action, **kwargs):
 		self._rate_limit()
 
-		ajaxpage = 'https://redacted.ch/' + action
+		ajaxpage = 'https://redacted.sh/' + action
 		#print "Requesting", ajaxpage
 		if self.authkey:
 			kwargs['auth'] = self.authkey
@@ -129,7 +129,7 @@ class RedApi:
 		"""Downloads the torrent at torrent_id using the authkey and passkey"""
 		self._rate_limit()
 
-		torrentpage = 'https://redacted.ch/torrents.php'
+		torrentpage = 'https://redacted.sh/torrents.php'
 		params = {'action': 'download', 'id': torrent_id}
 		if self.authkey:
 			params['authkey'] = self.authkey
