@@ -39,7 +39,7 @@ class DicAPI:
 		self.authkey = None
 		self.passkey = None
 		self.userid = None
-		self.tracker = "https://tracker.dicmusic.club/"
+		self.tracker = "https://tracker.dicmusic.com/"
 		self.last_request = time.time()
 		self.rate_limit_cool_down = 10
 		self.rate_limit_max = 5
@@ -85,7 +85,7 @@ class DicAPI:
 
 	def _login(self):
 		"""Logs in user and gets authkey from server"""
-		loginpage = 'https://dicmusic.club/login.php'
+		loginpage = 'https://dicmusic.com/login.php'
 		data = {'username': self.username,
 				'password': self.password}
 		r = self.session.post(loginpage, data=data)
@@ -97,13 +97,13 @@ class DicAPI:
 		self.userid = accountinfo['id']
 
 	def logout(self):
-		self.session.get("https://dicmusic.club/logout.php?auth=%s" % self.authkey)
+		self.session.get("https://dicmusic.com/logout.php?auth=%s" % self.authkey)
 
 	def request(self, action, **kwargs):
 		"""Makes an AJAX request at a given action page"""
 		self._rate_limit()
 
-		ajaxpage = 'https://dicmusic.club/ajax.php'
+		ajaxpage = 'https://dicmusic.com/ajax.php'
 		params = {'action': action}
 		if self.authkey:
 			params['auth'] = self.authkey
@@ -122,7 +122,7 @@ class DicAPI:
 	def request_html(self, action, **kwargs):
 		self._rate_limit()
 
-		ajaxpage = 'https://dicmusic.club/' + action
+		ajaxpage = 'https://dicmusic.com/' + action
 		if self.authkey:
 			kwargs['auth'] = self.authkey
 		r = self.session.get(ajaxpage, params=kwargs, allow_redirects=False)
@@ -133,7 +133,7 @@ class DicAPI:
 		"""Downloads the torrent at torrent_id using the authkey and passkey"""
 		self._rate_limit()
 
-		torrentpage = 'https://dicmusic.club/torrents.php'
+		torrentpage = 'https://dicmusic.com/torrents.php'
 		params = {'action': 'download', 'id': torrent_id}
 		if self.authkey:
 			params['authkey'] = self.authkey
@@ -160,7 +160,7 @@ class DicAPI:
 		data = [
 			("html", text)
 		]
-		url = 'https://dicmusic.club' + '/upload.php'
+		url = 'https://dicmusic.com' + '/upload.php'
 		r = self.session.post(url, data=data, params=params)
 		self.last_request = time.time()
 		return r.content
